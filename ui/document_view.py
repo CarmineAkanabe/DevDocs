@@ -6,7 +6,7 @@ class DocumentView(ctk.CTkFrame):
 
     def __init__(self, parent, db, on_document_selected):
         """Initialize document view."""
-        super().__init__(parent, width=280, fg_color="#16213e", border_width=1, border_color="#2d2d44")
+        super().__init__(parent, width=300, fg_color="#0d1117", border_width=2, border_color="#30363d")
         self.grid_propagate(False)
 
         self.db = db
@@ -22,12 +22,15 @@ class DocumentView(ctk.CTkFrame):
         self.search_var.trace("w", self.on_search_change)
         self.search_entry = ctk.CTkEntry(
             self,
-            placeholder_text="Search documents...",
-            height=36,
-            font=("Segoe UI", 11),
-            textvariable=self.search_var
+            placeholder_text="🔍 Search documents...",
+            height=44,
+            font=("Segoe UI", 13),
+            textvariable=self.search_var,
+            fg_color="#161b22",
+            border_color="#30363d",
+            border_width=2
         )
-        self.search_entry.grid(row=0, column=0, sticky="ew", padx=12, pady=12)
+        self.search_entry.grid(row=0, column=0, sticky="ew", padx=12, pady=16)
 
         # Scrollable frame for documents
         self.scroll_frame = ctk.CTkScrollableFrame(
@@ -84,9 +87,9 @@ class DocumentView(ctk.CTkFrame):
         if not filtered:
             no_docs = ctk.CTkLabel(
                 self.scroll_frame,
-                text="No documents found",
-                text_color="#666666",
-                font=("Segoe UI", 11)
+                text="📭 No documents found",
+                text_color="#8b949e",
+                font=("Segoe UI", 12)
             )
             no_docs.pack(pady=20)
             return
@@ -120,14 +123,15 @@ class DocumentView(ctk.CTkFrame):
             folder_btn = ctk.CTkButton(
                 container,
                 text=f"📁 {key}",
-                font=("Segoe UI", 10),
-                height=28,
+                font=("Segoe UI", 11),
+                height=32,
                 fg_color="transparent",
-                text_color="#aaaaaa",
+                text_color="#8b949e",
+                hover_color="#161b22",
                 anchor="w",
                 command=lambda p=folder_path, f=container, lvl=level: self._toggle_folder(p, f, lvl)
             )
-            folder_btn.pack(fill="x", padx=(8 + level * 16, 8), pady=2)
+            folder_btn.pack(fill="x", padx=(8 + level * 16, 8), pady=3)
 
             # Child frame that will hold folder contents
             child_frame = ctk.CTkFrame(container, fg_color="transparent")
@@ -147,14 +151,15 @@ class DocumentView(ctk.CTkFrame):
             btn = ctk.CTkButton(
                 parent_frame,
                 text=f"📄 {filename}" + ("" if is_read else " ●"),
-                font=("Segoe UI", 10, "bold" if not is_read else "normal"),
-                height=32,
+                font=("Segoe UI", 11, "bold" if not is_read else "normal"),
+                height=36,
                 fg_color="transparent",
-                text_color="#ffffff" if not is_read else "#888888",
+                hover_color="#161b22",
+                text_color="#58a6ff" if not is_read else "#8b949e",
                 anchor="w",
                 command=lambda did=doc_id: self.select_document(did)
             )
-            btn.pack(fill="x", padx=(8 + (level + 1) * 16, 8), pady=2)
+            btn.pack(fill="x", padx=(8 + (level + 1) * 16, 8), pady=3)
             self.document_buttons[doc_id] = btn
 
     def _toggle_folder(self, folder_path: str, container: object, level: int):
@@ -183,10 +188,20 @@ class DocumentView(ctk.CTkFrame):
         """Handle search input change."""
         search_text = self.search_var.get()
 
-        # Clear and rebuild tree with filter
-        for btn in self.document_buttons.values():
-            btn.destroy()
+        # Clear and rebuild tree with filter safely
+        for btn in list(self.document_buttons.values()):
+            try:
+                btn.destroy()
+            except Exception:
+                pass
         self.document_buttons.clear()
+
+        # Clear all children safely
+        for child in list(self.scroll_frame.winfo_children()):
+            try:
+                child.destroy()
+            except Exception:
+                pass
 
         if self.current_topic_id is not None:
             documents = self.db.get_topic_documents(self.current_topic_id)

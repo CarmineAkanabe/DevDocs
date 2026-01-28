@@ -7,7 +7,7 @@ class TopicView(ctk.CTkFrame):
 
     def __init__(self, parent, db, on_topic_selected):
         """Initialize topic view."""
-        super().__init__(parent, width=200, fg_color="#1a1a2e", border_width=1, border_color="#2d2d44")
+        super().__init__(parent, width=220, fg_color="#0d1117", border_width=2, border_color="#30363d")
         self.grid_propagate(False)
 
         self.db = db
@@ -21,11 +21,11 @@ class TopicView(ctk.CTkFrame):
         # Title
         title_label = ctk.CTkLabel(
             self,
-            text="Topics",
-            font=("Segoe UI", 12, "bold"),
-            text_color="#ffffff"
+            text="📚 Topics",
+            font=("Segoe UI", 14, "bold"),
+            text_color="#58a6ff"
         )
-        title_label.grid(row=0, column=0, sticky="ew", padx=16, pady=(16, 12))
+        title_label.grid(row=0, column=0, sticky="ew", padx=16, pady=(20, 16))
 
         # Scrollable frame for topics
         self.scroll_frame = ctk.CTkScrollableFrame(
@@ -37,30 +37,42 @@ class TopicView(ctk.CTkFrame):
         self.scroll_frame.grid_columnconfigure(0, weight=1)
 
         # Info section
-        self.info_frame = ctk.CTkFrame(self, fg_color="transparent", height=80)
-        self.info_frame.grid(row=2, column=0, sticky="ew", padx=16, pady=16)
+        self.info_frame = ctk.CTkFrame(self, fg_color="#161b22", corner_radius=8, height=90)
+        self.info_frame.grid(row=2, column=0, sticky="ew", padx=12, pady=16)
         self.info_frame.grid_propagate(False)
 
-        separator = ctk.CTkFrame(self.info_frame, height=1, fg_color="#3d3d5c")
+        separator = ctk.CTkFrame(self.info_frame, height=2, fg_color="#30363d")
         separator.pack(fill="x", pady=(0, 12))
 
         self.info_label = ctk.CTkLabel(
             self.info_frame,
             text="No topic selected",
             font=("Segoe UI", 10),
-            text_color="#888888",
+            text_color="#8b949e",
             justify="left"
         )
-        self.info_label.pack(anchor="w")
+        self.info_label.pack(anchor="w", padx=12, pady=8)
 
         self.refresh()
 
     def refresh(self):
         """Refresh topic list."""
-        # Clear existing buttons
-        for btn in self.topic_buttons.values():
-            btn.destroy()
+        # Store current selection
+        current_id = self.current_topic_id
+        
+        # Clear existing buttons safely using after_idle
+        old_buttons = list(self.topic_buttons.values())
         self.topic_buttons.clear()
+        
+        def _destroy_old():
+            for btn in old_buttons:
+                try:
+                    if btn.winfo_exists():
+                        btn.destroy()
+                except Exception:
+                    pass
+        
+        self.after_idle(_destroy_old)
 
         # Get topics
         topics = self.db.get_all_topics()
@@ -68,6 +80,12 @@ class TopicView(ctk.CTkFrame):
         # Create buttons
         for topic in topics:
             self.add_topic_button(topic)
+            
+        # Restore selection
+        if current_id:
+            self.current_topic_id = current_id
+            self.update_selection()
+            self.update_info()
 
     def add_topic_button(self, topic):
         """Add a topic button."""
@@ -77,13 +95,17 @@ class TopicView(ctk.CTkFrame):
         btn = ctk.CTkButton(
             self.scroll_frame,
             text=f"📘 {topic_name}",
-            font=("Segoe UI", 11),
-            height=44,
-            corner_radius=8,
+            font=("Segoe UI", 12),
+            height=48,
+            corner_radius=10,
             anchor="w",
+            fg_color="#161b22",
+            hover_color="#21262d",
+            border_width=1,
+            border_color="#30363d",
             command=lambda: self.select_topic(topic_id)
         )
-        btn.pack(fill="x", pady=4, padx=8)
+        btn.pack(fill="x", pady=6, padx=10)
         self.topic_buttons[topic_id] = btn
 
     def select_topic(self, topic_id: int):
@@ -97,9 +119,9 @@ class TopicView(ctk.CTkFrame):
         """Update button colors based on selection."""
         for topic_id, btn in self.topic_buttons.items():
             if topic_id == self.current_topic_id:
-                btn.configure(fg_color="#22aa44", text_color="#ffffff")
+                btn.configure(fg_color="#238636", hover_color="#2ea043", text_color="#ffffff", border_color="#238636")
             else:
-                btn.configure(fg_color="#2d2d44", text_color="#ffffff")
+                btn.configure(fg_color="#161b22", hover_color="#21262d", text_color="#c9d1d9", border_color="#30363d")
 
     def update_info(self):
         """Update info section."""

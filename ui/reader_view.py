@@ -13,7 +13,7 @@ class ReaderView(ctk.CTkFrame):
 
     def __init__(self, parent, db):
         """Initialize reader view."""
-        super().__init__(parent, fg_color="#0f0f23")
+        super().__init__(parent, fg_color="#0d1117")
 
         self.db = db
         self.parser = MarkdownParser()
@@ -29,25 +29,25 @@ class ReaderView(ctk.CTkFrame):
             self,
             text="",
             font=("Segoe UI", 11),
-            text_color="#666666"
+            text_color="#8b949e"
         )
-        self.breadcrumb_label.grid(row=0, column=0, sticky="w", padx=32, pady=(24, 0))
+        self.breadcrumb_label.grid(row=0, column=0, sticky="w", padx=40, pady=(28, 0))
 
         # Title
         self.title_label = ctk.CTkLabel(
             self,
             text="",
-            font=("Segoe UI", 28, "bold"),
-            text_color="#ffffff"
+            font=("Segoe UI", 32, "bold"),
+            text_color="#58a6ff"
         )
-        self.title_label.grid(row=1, column=0, sticky="w", padx=32, pady=(8, 24))
+        self.title_label.grid(row=1, column=0, sticky="w", padx=40, pady=(12, 28))
 
         # Content scrollable frame
         self.scroll_frame = ctk.CTkScrollableFrame(
             self,
             fg_color="transparent"
         )
-        self.scroll_frame.grid(row=2, column=0, sticky="nsew", padx=32, pady=(0, 24))
+        self.scroll_frame.grid(row=2, column=0, sticky="nsew", padx=40, pady=(0, 28))
         self.scroll_frame.grid_columnconfigure(0, weight=1)
 
     def clear(self):
@@ -161,11 +161,11 @@ class ReaderView(ctk.CTkFrame):
                 label = ctk.CTkLabel(
                     self.scroll_frame,
                     text=text,
-                    font=("Segoe UI", 26, "bold"),
-                    text_color="#bff3d6",
-                    wraplength=800
+                    font=("Segoe UI", 28, "bold"),
+                    text_color="#58a6ff",
+                    wraplength=900
                 )
-                label.pack(anchor="w", pady=(32, 16))
+                label.pack(anchor="w", pady=(36, 18))
                 i += 1
                 continue
 
@@ -174,11 +174,11 @@ class ReaderView(ctk.CTkFrame):
                 label = ctk.CTkLabel(
                     self.scroll_frame,
                     text=text,
-                    font=("Segoe UI", 22, "bold"),
-                    text_color="#bff3d6",
-                    wraplength=800
+                    font=("Segoe UI", 24, "bold"),
+                    text_color="#79c0ff",
+                    wraplength=900
                 )
-                label.pack(anchor="w", pady=(24, 12))
+                label.pack(anchor="w", pady=(28, 14))
                 i += 1
                 continue
 
@@ -187,11 +187,11 @@ class ReaderView(ctk.CTkFrame):
                 label = ctk.CTkLabel(
                     self.scroll_frame,
                     text=text,
-                    font=("Segoe UI", 18, "bold"),
-                    text_color="#bff3d6",
-                    wraplength=800
+                    font=("Segoe UI", 20, "bold"),
+                    text_color="#a5d6ff",
+                    wraplength=900
                 )
-                label.pack(anchor="w", pady=(20, 10))
+                label.pack(anchor="w", pady=(24, 12))
                 i += 1
                 continue
 
@@ -200,13 +200,13 @@ class ReaderView(ctk.CTkFrame):
                 bullet_text = line.strip()[2:].strip()
                 bullet_label = ctk.CTkLabel(
                     self.scroll_frame,
-                    text=f"\u2022 {bullet_text}",
+                    text=f"• {bullet_text}",
                     font=("Segoe UI", 14),
-                    text_color="#b0b0b0",
-                    wraplength=750,
+                    text_color="#c9d1d9",
+                    wraplength=850,
                     justify="left"
                 )
-                bullet_label.pack(anchor="w", pady=4, padx=(24, 0))
+                bullet_label.pack(anchor="w", pady=5, padx=(28, 0))
                 i += 1
                 continue
 
@@ -216,11 +216,11 @@ class ReaderView(ctk.CTkFrame):
                     self.scroll_frame,
                     text=line.strip(),
                     font=("Segoe UI", 14),
-                    text_color="#b0b0b0",
-                    wraplength=800,
+                    text_color="#c9d1d9",
+                    wraplength=900,
                     justify="left"
                 )
-                para_label.pack(anchor="w", pady=(0, 12))
+                para_label.pack(anchor="w", pady=(0, 14))
 
             i += 1
 
@@ -231,11 +231,11 @@ class ReaderView(ctk.CTkFrame):
             widget.destroy()
 
         from tkinter import Text
-        frame = ctk.CTkFrame(self.scroll_frame, fg_color="#1a1a2e", corner_radius=6)
-        frame.pack(fill="both", expand=True, pady=12)
+        frame = ctk.CTkFrame(self.scroll_frame, fg_color="#161b22", corner_radius=10, border_width=1, border_color="#30363d")
+        frame.pack(fill="both", expand=True, pady=16)
 
-        text_widget = Text(frame, wrap="word", font=("Consolas", 12), bg="#0f0f23", fg="#e0e0e0", bd=0)
-        text_widget.pack(fill="both", expand=True, padx=8, pady=8)
+        text_widget = Text(frame, wrap="word", font=("Consolas", 12), bg="#161b22", fg="#c9d1d9", bd=0)
+        text_widget.pack(fill="both", expand=True, padx=16, pady=16)
         text_widget.insert("1.0", content)
         text_widget.config(state="disabled")
 
@@ -246,36 +246,36 @@ class ReaderView(ctk.CTkFrame):
     def _render_code_block(self, code: str, language: str):
         """Render code block with syntax highlighting using Pygments."""
         # Code block frame
-        block_frame = ctk.CTkFrame(self.scroll_frame, fg_color="#1a1a2e", corner_radius=8, border_width=1, border_color="#2d2d44")
-        block_frame.pack(fill="both", expand=False, pady=16, padx=0)
+        block_frame = ctk.CTkFrame(self.scroll_frame, fg_color="#161b22", corner_radius=10, border_width=1, border_color="#30363d")
+        block_frame.pack(fill="both", expand=False, pady=20, padx=0)
 
         # Header with language and copy button
-        header_frame = ctk.CTkFrame(block_frame, fg_color="#0a0a1a", corner_radius=0)
+        header_frame = ctk.CTkFrame(block_frame, fg_color="#0d1117", corner_radius=0)
         header_frame.pack(fill="x", padx=0, pady=0)
 
         lang_label = ctk.CTkLabel(
             header_frame,
             text=f"📋 {language.upper()}",
-            font=("Segoe UI", 10, "bold"),
-            text_color="#22aa44"
+            font=("Segoe UI", 11, "bold"),
+            text_color="#238636"
         )
-        lang_label.pack(anchor="w", padx=12, pady=8)
+        lang_label.pack(anchor="w", padx=16, pady=10)
 
         # Code content with text widget for better display
         from tkinter import Text
-        code_frame = ctk.CTkFrame(block_frame, fg_color="#1a1a2e")
+        code_frame = ctk.CTkFrame(block_frame, fg_color="#161b22")
         code_frame.pack(fill="both", expand=True, padx=0, pady=0)
 
         # Create a text widget for code display
         code_text = Text(
             code_frame,
             font=("Consolas", 12),
-            bg="#1a1a2e",
-            fg="#e0e0e0",
+            bg="#161b22",
+            fg="#c9d1d9",
             relief="flat",
             bd=0,
-            padx=12,
-            pady=12,
+            padx=16,
+            pady=16,
             wrap="word",
             height=min(15, code.count('\n') + 2)
         )

@@ -31,31 +31,31 @@ def main():
     splash.geometry(f"{w}x{h}+{x}+{y}")
 
     # Background frame
-    frame = tk.Frame(splash, bg="#081018")
+    frame = tk.Frame(splash, bg="#0d1117")
     frame.pack(fill="both", expand=True)
 
-    title = tk.Label(frame, text="DevDocs", fg="#22aa44", bg="#081018", font=("Segoe UI", 28, "bold"))
-    title.pack(pady=(28, 4))
+    title = tk.Label(frame, text="DevDocs", fg="#58a6ff", bg="#0d1117", font=("Segoe UI", 32, "bold"))
+    title.pack(pady=(32, 6))
 
-    subtitle = tk.Label(frame, text="Offline Documentation Reader", fg="#cfeee0", bg="#081018", font=("Segoe UI", 12))
+    subtitle = tk.Label(frame, text="Offline Documentation Reader", fg="#c9d1d9", bg="#0d1117", font=("Segoe UI", 13))
     subtitle.pack()
 
     # Decorative separator
-    sep = tk.Frame(frame, height=2, bg="#0f3f1f")
-    sep.pack(fill="x", padx=60, pady=12)
+    sep = tk.Frame(frame, height=2, bg="#30363d")
+    sep.pack(fill="x", padx=60, pady=16)
 
     # Progress bar simulation
-    progress_frame = tk.Frame(frame, bg="#081018")
+    progress_frame = tk.Frame(frame, bg="#0d1117")
     progress_frame.pack(fill="x", padx=60)
-    canvas = tk.Canvas(progress_frame, width=440, height=10, bg="#0b0e12", highlightthickness=0)
+    canvas = tk.Canvas(progress_frame, width=440, height=12, bg="#161b22", highlightthickness=0)
     canvas.pack()
-    bar = canvas.create_rectangle(0, 0, 0, 10, fill="#22aa44", width=0)
+    bar = canvas.create_rectangle(0, 0, 0, 12, fill="#238636", width=0)
 
     splash.update()
 
     # Animate progress bar quickly for polish
     for i in range(0, 441, 22):
-        canvas.coords(bar, 0, 0, i, 10)
+        canvas.coords(bar, 0, 0, i, 12)
         splash.update()
         time.sleep(0.03)
 

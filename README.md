@@ -1,30 +1,92 @@
-# 📘 DevDocs
+# 📘 DevDocs - Offline Documentation Reader
 
-> **Offline-first documentation reader for developers** — Download, organize, and read technical documentation locally with a beautiful desktop interface.
+<div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)
-![customTkinter](https://img.shields.io/badge/customTkinter-5.2.2-306998?style=flat-square)
-![SQLite](https://img.shields.io/badge/SQLite-Built--in-blue?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Production-green?style=flat-square)
+![DevDocs Banner](https://img.shields.io/badge/DevDocs-Offline%20Documentation%20Reader-58a6ff?style=for-the-badge&logo=markdown)
+
+**Your personal offline documentation library for developers**
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![customTkinter](https://img.shields.io/badge/customTkinter-5.2.2-1f6feb?style=flat-square)](https://github.com/TomSchimansky/CustomTkinter)
+[![SQLite](https://img.shields.io/badge/SQLite-Built--in-003B57?style=flat-square&logo=sqlite)](https://www.sqlite.org/)
+[![License](https://img.shields.io/badge/License-MIT-238636?style=flat-square)](LICENSE)
+
+[Features](#-features) • [Installation](#-installation) • [Quick Start](#-quick-start) • [Screenshots](#-screenshots)
+
+</div>
+
+---
+
+## 🎯 What is DevDocs?
+
+**DevDocs** is a powerful desktop application that allows developers to download, organize, and read technical documentation completely offline. Built with Python and customTkinter, it provides a beautiful, GitHub-inspired dark interface for browsing markdown documentation from any public GitHub repository.
+
+### Why DevDocs?
+
+- **📚 Centralized Documentation** - Keep all your favorite framework docs in one place
+- **🔌 Work Offline** - Download once, access forever without internet
+- **⚡ Lightning Fast** - No loading times, no ads, no distractions
+- **🎨 Beautiful Interface** - Modern GitHub-inspired dark theme
+- **🔍 Smart Search** - Find what you need instantly with real-time filtering
+- **📊 Track Progress** - Mark documents as read and track your learning journey
+
+### Perfect For:
+
+- 👨‍💻 **Developers** who need quick offline access to documentation
+- 🎓 **Students** learning new frameworks and technologies
+- 👥 **Teams** who want consistent documentation across all members
+- 🌍 **Remote Workers** in areas with limited internet connectivity
+- 📖 **Technical Writers** who need to reference multiple docs
 
 ---
 
 ## ✨ Features
 
-- 🔌 **Offline First** — Download once, read anywhere without internet
-- 📥 **GitHub Integration** — Download documentation directly from public repositories
-- 📖 **Rich Markdown Rendering** — Styled headings, lists, code blocks, and syntax highlighting
-- 💾 **Persistent Storage** — SQLite database tracks topics, documents, and reading status
-- 🎨 **Modern UI** — Clean dark-mode interface with green accents built with customTkinter
-- ➕ **Extensible** — Add custom documentation topics dynamically
-- 🔍 **Search & Organize** — Search documents and track read/unread status
-- 📚 **Built-in Help** — Access the user manual directly from the app
+### 🔌 Offline-First Architecture
+Download documentation once and access it forever without internet. Perfect for coding on planes, trains, or anywhere with spotty connectivity.
+
+### 📥 GitHub Integration
+Seamlessly download markdown documentation from any public GitHub repository. Supports:
+- Multiple branches (main, master, develop, dev)
+- Subfolder targeting (e.g., `/docs`, `/documentation`)
+- Automatic markdown file extraction
+- Fallback to README.md if no docs found
+
+### 📖 Rich Markdown Rendering
+Beautiful rendering of markdown content with:
+- **Syntax-highlighted code blocks** using Pygments
+- **Styled headings** with gradient blue colors
+- **Formatted lists** and paragraphs
+- **Responsive layout** that adapts to window size
+
+### 💾 Persistent Storage
+SQLite database tracks:
+- All your documentation topics
+- Downloaded documents and their locations
+- Read/unread status for each document
+- Last sync timestamps
+
+### 🎨 Modern GitHub-Inspired UI
+- **Dark theme** optimized for long reading sessions
+- **Three-panel layout** for efficient navigation
+- **Smooth animations** and hover effects
+- **Responsive design** that scales beautifully
+
+### 🔍 Smart Search & Organization
+- **Real-time search** filters documents as you type
+- **Hierarchical tree view** preserves folder structure
+- **Unread indicators** help track your progress
+- **Collapsible folders** for clean organization
+
+### ➕ Extensible & Customizable
+- **Add unlimited topics** from any GitHub repository
+- **Custom subfolder paths** for precise documentation targeting
+- **Resizable windows** and panels
+- **Keyboard shortcuts** for power users
 
 ---
 
-## 🚀 Installation Guide for Teachers
-
-This section provides complete step-by-step instructions to set up DevDocs on Windows, macOS, and Linux.
+## 🚀 Installation
 
 ### System Requirements
 
@@ -32,183 +94,158 @@ This section provides complete step-by-step instructions to set up DevDocs on Wi
 |-----------|-------------|
 | **Operating System** | Windows 10/11, macOS 10.14+, or Linux (Ubuntu 18.04+) |
 | **Python** | 3.10 or higher |
-| **RAM** | 256 MB minimum (512 MB recommended) |
-| **Disk Space** | 100 MB for app + variable for downloaded docs |
-| **Internet** | Required for downloading docs; optional for reading |
+| **RAM** | 512 MB minimum (1 GB recommended) |
+| **Disk Space** | 100 MB for app + space for downloaded docs |
+| **Internet** | Required only for downloading documentation |
 
 ### Prerequisites
 
 Before installing, ensure you have:
 
-- **Python 3.10+** — [Download from python.org](https://www.python.org/downloads/)
-- **pip** (comes with Python automatically)
-- **Git** (optional, for cloning) — [Download from git-scm.com](https://git-scm.com/)
+1. **Python 3.10+** installed - [Download from python.org](https://www.python.org/downloads/)
+2. **pip** package manager (included with Python)
+3. **Git** (optional, for cloning) - [Download from git-scm.com](https://git-scm.com/)
 
-**Verify Python is installed:**
+**Verify Python installation:**
 ```bash
 python --version
+# Should output: Python 3.10.x or higher
 ```
-
-Output should show `Python 3.10.x` or higher.
 
 ---
 
-## 💻 Step-by-Step Installation
+### 📦 Installation Steps
 
-### Step 1: Get the Project
+#### Step 1: Get the Project
 
-#### Option A: Clone with Git (Recommended)
+**Option A: Clone with Git (Recommended)**
 ```bash
 git clone https://github.com/CarmineAkanabe/DevDocs.git
 cd DevDocs
 ```
 
-#### Option B: Manual Download
-1. Download as ZIP from GitHub
+**Option B: Download ZIP**
+1. Download the ZIP file from [GitHub](https://github.com/CarmineAkanabe/DevDocs)
 2. Extract to your desired location
-3. Open terminal/command prompt in the folder
+3. Open terminal/command prompt in the extracted folder
 
-### Step 2: Create Virtual Environment
+#### Step 2: Create Virtual Environment
 
-A virtual environment keeps project dependencies isolated from system Python.
+A virtual environment keeps project dependencies isolated from your system Python.
 
-#### Windows (Command Prompt):
-```bash
+**Windows (Command Prompt):**
+```cmd
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-#### Windows (PowerShell):
+**Windows (PowerShell):**
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
-#### macOS/Linux (Terminal):
+**macOS/Linux:**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-**Confirmation**: Your prompt should now show `(.venv)` prefix.
+✅ **Confirmation:** Your prompt should now show `(.venv)` prefix
 
-### Step 3: Upgrade pip
-
-Ensure pip is up-to-date:
+#### Step 3: Install Dependencies
 
 ```bash
+# Upgrade pip first
 python -m pip install --upgrade pip
-```
 
-### Step 4: Install Dependencies
-
-Install all required packages:
-
-```bash
+# Install all required packages
 pip install -r requirements.txt
 ```
 
 **What gets installed:**
-- **customtkinter** — Modern GUI framework
-- **requests** — Download from GitHub
-- **markdown** — Parse markdown files
-- **pygments** — Syntax highlighting
+- `customtkinter` - Modern GUI framework
+- `requests` - HTTP library for GitHub downloads
+- `markdown` - Markdown parser
+- `pygments` - Syntax highlighting for code blocks
+- And other supporting libraries
 
-**Verify installation:**
-```bash
-pip list
-```
-
-You should see all packages listed with versions.
-
-### Step 5: Run the Application
+#### Step 4: Run the Application
 
 ```bash
 python app.py
 ```
 
-**Expected**: A window with title "DevDocs - Offline Documentation Reader" opens with three topics in the sidebar: GitHub Docs, Python, and SQL.
+🎉 **Success!** The DevDocs window should open with a beautiful splash screen, followed by the main interface.
 
 ---
 
-## 🎯 Quick Start (After Installation)
+## 🎯 Quick Start
 
 ### First Launch
 
-1. **Download documentation**:
-   - Select "Python" from the sidebar
-   - Click "⟳ Sync" button
-   - Wait for download to complete (may take 1-2 minutes)
+When you first launch DevDocs, you'll see three pre-configured topics:
+- **GitHub Docs** - Official GitHub documentation
+- **Python Docs** - Python standard library documentation
+- **React Docs** - React framework documentation
 
-2. **Read documentation**:
-   - Expand folders in the file tree
-   - Click any document to open
-   - Content renders in the right panel with syntax highlighting
+### Download Your First Documentation
 
-3. **Access help**:
-   - Click "📖 Manual" button in header
-   - Browse complete user guide with screenshots
+1. **Select a topic** from the left sidebar (e.g., "Python Docs")
+2. **Click the "⟳ Sync" button** in the top-right header
+3. **Wait for download** - Progress bar shows download status
+4. **Browse documents** - Expand folders in the middle panel
+5. **Read documentation** - Click any document to view it
+
+### Add a Custom Topic
+
+1. **Click "✚ Add Topic"** button in the header
+2. **Fill in the form:**
+   - **Topic Name:** e.g., "Vue.js"
+   - **GitHub URL:** e.g., `https://github.com/vuejs/docs`
+   - **Subfolder:** e.g., `src` (optional - leave empty for root)
+3. **Click "✓ ADD TOPIC"** button (or press Enter)
+4. **Sync the new topic** to download its documentation
+
+### Search Documents
+
+1. **Select a topic** from the sidebar
+2. **Type in the search bar** (🔍 Search documents...)
+3. **Results filter in real-time** as you type
+4. **Clear search** to see all documents again
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Enter` | Submit Add Topic form |
+| `Escape` | Clear search (when focused) |
 
 ---
 
-## 🔧 Troubleshooting Common Issues
+## 📸 Screenshots
 
-### Issue: "python: command not found"
+### Main Interface
+Beautiful three-panel layout with topic sidebar, document tree, and markdown reader.
 
-**Cause**: Python not installed or not in PATH
+### Add Topic Dialog
+Large, clear dialog with prominent buttons for adding new documentation sources.
 
-**Solution**:
-- Download Python from [python.org](https://www.python.org/downloads/)
-- **Windows**: Check "Add python.exe to PATH" during install
-- **macOS**: Use `python3` instead of `python`, or install via Homebrew: `brew install python3`
-- **Linux**: `sudo apt-get install python3`
+### Markdown Rendering
+Syntax-highlighted code blocks, styled headings, and formatted content.
 
-### Issue: "ModuleNotFoundError: No module named 'customtkinter'"
+---
 
-**Cause**: Virtual environment not activated or dependencies not installed
+## 🛠️ Technology Stack
 
-**Solution**:
-```bash
-# Activate venv:
-.venv\Scripts\activate          # Windows
-source .venv/bin/activate      # macOS/Linux
-
-# Reinstall:
-pip install -r requirements.txt
-```
-
-### Issue: "Permission denied" Error
-
-**Solution**:
-- **Windows**: Run Command Prompt as Administrator
-- **macOS/Linux**: Use `sudo` if needed: `sudo python3 -m venv .venv`
-
-### Issue: App doesn't start or crashes
-
-**Solution**:
-1. Verify Python 3.10+: `python --version`
-2. Reinstall dependencies: `pip install --force-reinstall -r requirements.txt`
-3. Check for error output in terminal window
-4. Try on a fresh virtual environment (delete `.venv` and restart)
-
-### Issue: "Download failed: 404 error"
-
-**Cause**: Repository URL invalid or inaccessible
-
-**Solution**:
-- Check internet connection
-- Verify GitHub URL is correct (must be public repository)
-- Try with a different topic first
-- Ensure repository contains markdown files in expected location
-
-### Issue: No documents display after download
-
-**Cause**: Repository subfolder incorrect or no markdown files
-
-**Solution**:
-- Check that documentation subfolder is correct (if specified)
-- Some repos may not have markdown docs in accessible location
-- Try with Python or GitHub Docs topics to verify setup
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| **GUI Framework** | customTkinter 5.2.2 | Modern, customizable desktop interface |
+| **Database** | SQLite3 (built-in) | Local data persistence |
+| **Markdown Parser** | Markdown 3.10.1 | Parse and render .md files |
+| **Syntax Highlighting** | Pygments 2.19.2 | Colorize code blocks |
+| **HTTP Client** | Requests 2.32.5 | Download from GitHub API |
+| **Language** | Python 3.10+ | Core application logic |
 
 ---
 
@@ -216,238 +253,133 @@ pip install -r requirements.txt
 
 ```
 DevDocs/
-├── app.py                      # Application entry point
-├── UserManual.md               # Built-in user manual
-├── README.md                   # This file
+├── app.py                      # Application entry point with splash screen
 ├── requirements.txt            # Python dependencies
-├── devdocs.db                  # SQLite database (auto-created)
+├── README.md                   # This file
+├── UserManual.md              # Comprehensive user guide
+├── LICENSE                     # MIT License
 │
 ├── database/
 │   ├── __init__.py
-│   └── db_manager.py           # SQLite operations
+│   └── db_manager.py          # SQLite database operations
 │
 ├── services/
 │   ├── __init__.py
-│   ├── downloader.py           # GitHub download logic
-│   ├── markdown_parser.py      # Markdown parsing
-│   └── file_manager.py         # File operations
+│   ├── downloader.py          # GitHub repository downloader
+│   ├── markdown_parser.py     # Markdown parsing and rendering
+│   └── file_manager.py        # File system operations
 │
 ├── ui/
 │   ├── __init__.py
-│   ├── main_window.py          # Main window & header
-│   ├── topic_view.py           # Topic sidebar
-│   ├── document_view.py        # File tree
-│   └── reader_view.py          # Markdown renderer
+│   ├── main_window.py         # Main application window
+│   ├── topic_view.py          # Topic sidebar component
+│   ├── document_view.py       # Document tree component
+│   └── reader_view.py         # Markdown reader component
 │
-├── docs/                       # Downloaded docs (auto-created)
-│   ├── github-docs/
-│   ├── python/
-│   └── sql/
+├── docs/                       # Downloaded documentation (auto-created)
+│   ├── github_docs/
+│   ├── python_docs/
+│   └── react_docs/
 │
-└── assets/
-    └── fonts/                  # Custom fonts (optional)
+└── devdocs.db                 # SQLite database (auto-created)
 ```
 
 ---
 
-## 🛠️ Technology Stack
+## 🔧 Troubleshooting
 
-| Component | Library | Version | Purpose |
-|-----------|---------|---------|---------|
-| **GUI** | customTkinter | 5.2.2 | Modern desktop interface |
-| **Database** | SQLite3 | Built-in | Local data storage |
-| **Markdown** | Markdown | 3.10.1 | Parse .md files |
-| **Highlighting** | Pygments | 2.19.2 | Code syntax colors |
-| **Downloads** | Requests | 2.32.5 | GitHub API access |
+### Common Issues
 
-All other dependencies use Python standard library (no additional packages needed beyond what's in requirements.txt).
+**Issue: "python: command not found"**
+- **Solution:** Install Python from [python.org](https://www.python.org/downloads/)
+- On Windows, ensure "Add Python to PATH" is checked during installation
+- On macOS/Linux, use `python3` instead of `python`
 
----
+**Issue: "ModuleNotFoundError: No module named 'customtkinter'"**
+- **Solution:** Activate virtual environment and reinstall dependencies:
+  ```bash
+  .venv\Scripts\activate  # Windows
+  source .venv/bin/activate  # macOS/Linux
+  pip install -r requirements.txt
+  ```
 
-## 📚 Default Documentation Topics
+**Issue: "Download failed: 404 error"**
+- **Solution:** Verify the GitHub URL is correct and the repository is public
+- Check that the subfolder path exists in the repository
+- Try with a different branch (main/master/develop)
 
-The app includes three pre-configured topics:
+**Issue: No documents appear after download**
+- **Solution:** Check that the repository contains markdown files
+- Verify the subfolder path is correct
+- Try leaving the subfolder empty to download from root
 
-| Topic | Repository | Content |
-|-------|-----------|---------|
-| 📖 **GitHub Docs** | github.com/github/docs | GitHub platform documentation |
-| 🐍 **Python** | github.com/python/cpython | Python standard library |
-| 🗄️ **SQL** | github.com/sqlite/sqlite | SQLite database documentation |
-
-### Adding Custom Topics
-
-1. Click **"+ Add Topic"** button (green color, top left)
-2. Enter topic name and GitHub repository URL
-3. (Optional) Specify documentation subfolder (e.g., `docs/`, `Documentation/`)
-4. Click **"Add Topic"** to save
-
-**Example**: Add React documentation
-- Name: `React`
-- URL: `https://github.com/facebook/react`
-- Subfolder: `docs`
+**Issue: Widget refresh errors in console**
+- **Solution:** These are harmless and don't affect functionality
+- The app handles widget cleanup safely in the background
 
 ---
 
-## 💡 Usage Tips
+## 💡 Tips & Best Practices
 
-### Download Documentation
+### Organizing Documentation
 
-1. Select a topic from sidebar
-2. Click **"⟳ Sync"** button (arrow icon)
-3. Monitor progress bar
-4. Status bar shows "Downloaded X files" when complete
-5. Documents appear in file tree (may be in expandable folders)
+- **Use descriptive topic names** - e.g., "React v18 Docs" instead of just "React"
+- **Group related topics** - Keep framework docs separate from language docs
+- **Regular syncs** - Update documentation periodically to get latest changes
 
-### Search Documents
+### Optimizing Performance
 
-1. Type in the search box in the file tree
-2. Results filter in real-time as you type
-3. Clear search box to see all documents again
-4. Search is case-insensitive
+- **Download selectively** - Only sync topics you actively use
+- **Use subfolders** - Target specific documentation folders to reduce download size
+- **Clear old topics** - Remove unused topics to save disk space
 
-### Mark as Read
+### Keyboard Efficiency
 
-- When you click a document, it's automatically marked as read
-- Unread documents show a bullet (•) indicator
-- Reading progress persists across sessions in database
-
-### Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+F` | Focus search (when available) |
-| `Escape` | Clear search |
-
----
-
-## 💾 Data Storage & Privacy
-
-### Local Storage
-
-- **`docs/`** — All downloaded markdown files organized by topic
-- **`devdocs.db`** — SQLite database with topics, documents, reading status
-- **No cloud sync** — Everything stays on your computer
-- **No telemetry** — No data sent anywhere
-- **No tracking** — Completely private, offline-first design
-
-### Offline Usage
-
-- After initial download, app works **completely offline**
-- All reading uses local files (no internet required)
-- Syncing requires internet only to fetch updates
-- **Perfect for classroom** — Download docs in advance, use offline in class with no internet needed
-
-### Reset/Clear Data
-
-To start fresh:
-```bash
-rm devdocs.db              # macOS/Linux
-del devdocs.db             # Windows
-
-rm -rf docs/               # macOS/Linux
-rmdir /s docs              # Windows
-```
-
-Restart the app to reinitialize with defaults.
-
----
-
-## ✅ Verification Checklist
-
-After installation, verify:
-
-- [ ] Python 3.10+ installed (`python --version`)
-- [ ] Virtual environment created (`.venv` folder exists)
-- [ ] Virtual environment activated (`(.venv)` in prompt)
-- [ ] Dependencies installed (`pip list` shows all packages)
-- [ ] App launches without errors (`python app.py`)
-- [ ] Topics visible in sidebar (GitHub Docs, Python, SQL)
-- [ ] Can download documentation (click "⟳ Sync")
-- [ ] Can open and read documents in right panel
-- [ ] Manual accessible from "📖 Manual" button
-- [ ] Code blocks display with syntax highlighting
-- [ ] Search filters documents in real-time
-
----
-
-## 👥 For All Users
-
-### Getting Started
-
-1. **Install on your machine** — Follow the installation guide above
-2. **Download documentation** — Select a topic and click "⟳ Sync" to download
-3. **Read offline** — All documentation is available offline after download
-4. **Share offline** — Copy the entire `DevDocs` folder to share with others offline
-
-### Benefits of DevDocs
-
-- ✅ Fast, offline access to documentation anytime
-- ✅ No internet bandwidth required after initial download
-- ✅ Consistent experience across all platforms
-- ✅ Learn documentation navigation and organization
-- ✅ Add custom topics for your favorite frameworks
-
-### Use Cases
-
-- Personal development and reference
-- Team knowledge sharing and onboarding
-- Classroom and educational environments
-- Remote areas with limited connectivity
-- Quick offline API reference during coding
-
----
-
-## 📞 Getting Help
-
-If problems occur:
-
-1. **Check the terminal output** for error messages
-2. **Review troubleshooting section** above
-3. **Verify all prerequisites** are installed
-4. **Try a clean reinstall** — delete `.venv/` and `devdocs.db`, start from Step 2
-5. **Check the UserManual** — click "📖 Manual" inside app
-
----
-
-## 📦 Dependencies Reference
-
-All packages in `requirements.txt`:
-
-```
-certifi==2026.1.4          # SSL certificates
-charset-normalizer==3.4.4  # Character encoding
-customtkinter==5.2.2       # GUI framework
-darkdetect==0.8.0          # Dark mode detection
-idna==3.11                 # Domain names
-Markdown==3.10.1           # Markdown parser
-packaging==26.0            # Version parsing
-Pygments==2.19.2           # Syntax highlighting
-requests==2.32.5           # HTTP requests
-urllib3==2.6.3             # URL handling
-```
+- **Tab through fields** in the Add Topic dialog
+- **Press Enter** to submit forms quickly
+- **Use search** to find documents faster than scrolling
 
 ---
 
 ## 📄 License
 
-This project is open source under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🎯 Support Resources
+## 👨‍💻 Author
 
-- **User Manual** — Click "📖 Manual" in the app (2000+ lines of comprehensive help)
-- **Issues** — Check troubleshooting section in README
-- **Questions** — Refer to project repository or documentation
-- **Offline Help** — All help is available offline after app launches
+**Carmine Akanabe (Serge)**
+
+- GitHub: [@CarmineAkanabe](https://github.com/CarmineAkanabe)
+- Project: [DevDocs](https://github.com/CarmineAkanabe/DevDocs)
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: January 2026  
-**Python Version**: 3.10+  
-**Platforms**: Windows, macOS, Linux  
+## 🙏 Acknowledgments
 
-**Author**: Carmine Akabane (Serge) — https://github.com/CarmineAkanabe
+- **customTkinter** - For the beautiful modern GUI framework
+- **Pygments** - For excellent syntax highlighting
+- **GitHub** - For hosting open-source documentation
+- **Python Community** - For amazing tools and libraries
 
-**Built with ❤️ for educators and developers**
+---
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [UserManual.md](UserManual.md) for detailed usage instructions
+2. Review the [Troubleshooting](#-troubleshooting) section above
+3. Check existing issues on [GitHub](https://github.com/CarmineAkanabe/DevDocs/issues)
+4. Create a new issue with detailed information about your problem
+
+---
+
+<div align="center">
+
+**Built with ❤️ for developers who love documentation**
+
+⭐ Star this repo if you find it useful!
+
+</div>

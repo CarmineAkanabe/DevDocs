@@ -51,7 +51,7 @@ class MainWindow(ctk.CTk):
         self._create_header()
 
         # Main content area
-        main_frame = ctk.CTkFrame(self, fg_color="#0f0f23")
+        main_frame = ctk.CTkFrame(self, fg_color="#010409")
         main_frame.grid(row=1, column=0, sticky="nsew", padx=0, pady=0)
         main_frame.grid_rowconfigure(0, weight=1)
         main_frame.grid_columnconfigure(0, weight=0)
@@ -78,80 +78,81 @@ class MainWindow(ctk.CTk):
 
     def _create_header(self):
         """Create header bar."""
-        header = ctk.CTkFrame(self, height=50, fg_color="#0a0a1a", border_width=1, border_color="#2d2d44")
+        header = ctk.CTkFrame(self, height=60, fg_color="#0d1117", border_width=2, border_color="#30363d")
         header.grid(row=0, column=0, sticky="ew", padx=0, pady=0)
         header.grid_propagate(False)
 
         # Left section
         left_frame = ctk.CTkFrame(header, fg_color="transparent")
-        left_frame.pack(side="left", padx=16, pady=0)
+        left_frame.pack(side="left", padx=20, pady=0)
 
         title_label = ctk.CTkLabel(
             left_frame,
             text="📘 DevDocs",
-            font=("Segoe UI", 16, "bold"),
-            text_color="#ffffff"
+            font=("Segoe UI", 18, "bold"),
+            text_color="#58a6ff"
         )
         title_label.pack()
 
         # Right section
         right_frame = ctk.CTkFrame(header, fg_color="transparent")
-        right_frame.pack(side="right", padx=16, pady=0)
+        right_frame.pack(side="right", padx=20, pady=0)
 
         add_topic_btn = ctk.CTkButton(
             right_frame,
-            text="+ Add Topic",
-            font=("Segoe UI", 11),
-            height=32,
-            corner_radius=6,
-            fg_color="#22aa44",
-            hover_color="#1a8833",
+            text="✚ Add Topic",
+            font=("Segoe UI", 12, "bold"),
+            height=36,
+            corner_radius=8,
+            fg_color="#238636",
+            hover_color="#2ea043",
             command=self.open_add_topic_dialog
         )
-        add_topic_btn.pack(side="left", padx=8)
+        add_topic_btn.pack(side="left", padx=6)
 
         manual_btn = ctk.CTkButton(
             right_frame,
             text="📖 Manual",
-            font=("Segoe UI", 11),
-            height=32,
-            corner_radius=6,
-            fg_color="transparent",
+            font=("Segoe UI", 12),
+            height=36,
+            corner_radius=8,
+            fg_color="#21262d",
+            hover_color="#30363d",
             border_width=1,
-            border_color="#3d3d5c",
+            border_color="#30363d",
             command=self.show_manual
         )
-        manual_btn.pack(side="left", padx=8)
+        manual_btn.pack(side="left", padx=6)
 
         about_btn = ctk.CTkButton(
             right_frame,
-            text="About",
-            font=("Segoe UI", 11),
-            height=32,
-            corner_radius=6,
-            fg_color="transparent",
+            text="ℹ About",
+            font=("Segoe UI", 12),
+            height=36,
+            corner_radius=8,
+            fg_color="#21262d",
+            hover_color="#30363d",
             border_width=1,
-            border_color="#3d3d5c",
+            border_color="#30363d",
             command=self.show_about
         )
-        about_btn.pack(side="left", padx=8)
+        about_btn.pack(side="left", padx=6)
 
         sync_btn = ctk.CTkButton(
             right_frame,
             text="⟳ Sync",
-            font=("Segoe UI", 11),
-            height=32,
-            corner_radius=6,
-            fg_color="transparent",
-            border_width=1,
-            border_color="#3d3d5c",
+            font=("Segoe UI", 12, "bold"),
+            height=36,
+            corner_radius=8,
+            fg_color="#1f6feb",
+            hover_color="#388bfd",
             command=self.sync_current_topic
         )
-        sync_btn.pack(side="left", padx=8)
+        sync_btn.pack(side="left", padx=6)
 
     def _create_status_bar(self):
         """Create status bar."""
-        self.status_frame = ctk.CTkFrame(self, height=28, fg_color="#0a0a1a", border_width=1, border_color="#2d2d44")
+        self.status_frame = ctk.CTkFrame(self, height=32, fg_color="#0d1117", border_width=2, border_color="#30363d")
         self.status_frame.grid(row=2, column=0, sticky="ew", padx=0, pady=0)
         self.status_frame.grid_propagate(False)
 
@@ -159,16 +160,16 @@ class MainWindow(ctk.CTk):
             self.status_frame,
             text="Ready",
             font=("Segoe UI", 11),
-            text_color="#666666"
+            text_color="#8b949e"
         )
-        self.status_label.pack(side="left", padx=12, pady=0)
+        self.status_label.pack(side="left", padx=16, pady=0)
 
         # Center copyright (expand to take available space)
         self.copy_label = ctk.CTkLabel(
             self.status_frame,
             text="© 2026 DevDocs",
             font=("Segoe UI", 11, "bold"),
-            text_color="#ffffff"
+            text_color="#c9d1d9"
         )
         self.copy_label.pack(side="left", expand=True)
 
@@ -177,9 +178,9 @@ class MainWindow(ctk.CTk):
             self.status_frame,
             text="CarmineAkanabe",
             font=("Segoe UI", 12, "bold"),
-            text_color="#22aa44"
+            text_color="#58a6ff"
         )
-        self.github_label.pack(side="right", padx=(0,12), pady=0)
+        self.github_label.pack(side="right", padx=(0,16), pady=0)
         try:
             self.github_label.bind("<Button-1>", lambda e: webbrowser.open("https://github.com/CarmineAkanabe"))
             self.github_label.bind("<Enter>", lambda e: self.github_label.configure(cursor="hand2"))
@@ -187,8 +188,8 @@ class MainWindow(ctk.CTk):
         except Exception:
             pass
 
-        self.progress_bar = ctk.CTkProgressBar(self.status_frame, width=200)
-        self.progress_bar.pack(side="right", padx=12, pady=6)
+        self.progress_bar = ctk.CTkProgressBar(self.status_frame, width=200, progress_color="#238636")
+        self.progress_bar.pack(side="right", padx=16, pady=6)
         self.progress_bar.pack_forget()
 
     def _init_default_topics(self):
@@ -196,9 +197,9 @@ class MainWindow(ctk.CTk):
         topics = self.db.get_all_topics()
         if len(topics) == 0:
             default_topics = [
-                ("JavaScript (MDN)", "https://github.com/mdn/content", "files/en-us"),
-                ("Python", "https://github.com/python/cpython", "Doc"),
-                ("SQL", "https://github.com/sqlite/sqlite", None)
+                ("GitHub Docs", "https://github.com/github/docs", "content"),
+                ("Python Docs", "https://github.com/python/cpython", "Doc"),
+                ("React Docs", "https://github.com/facebook/react", "docs")
             ]
 
             for name, url, subfolder in default_topics:
@@ -268,8 +269,8 @@ class MainWindow(ctk.CTk):
         """Background thread for syncing."""
         try:
             self.downloading = True
-            self.status_label.configure(text=f"Downloading...", text_color="#22aa44")
-            self.progress_bar.pack(side="right", padx=12, pady=6)
+            self.status_label.configure(text=f"Downloading...", text_color="#238636")
+            self.progress_bar.pack(side="right", padx=16, pady=6)
             self.progress_bar.set(0)
 
             if self.current_topic_id is None:
@@ -302,17 +303,17 @@ class MainWindow(ctk.CTk):
             self.db.update_topic_timestamp(self.current_topic_id)
             self.progress_bar.set(1)
 
-            self.status_label.configure(text=f"Downloaded {len(files)} files", text_color="#2ed573")
+            self.status_label.configure(text=f"✓ Downloaded {len(files)} files", text_color="#238636")
             self.topic_view.refresh()
             self.document_view.refresh_current_topic()
 
         except Exception as e:
-            self.status_label.configure(text=f"Error: {str(e)}", text_color="#ff4757")
+            self.status_label.configure(text=f"✗ Error: {str(e)}", text_color="#f85149")
             messagebox.showerror("Download Error", str(e))
         finally:
             self.downloading = False
             self.progress_bar.pack_forget()
-            self.after(2000, lambda: self.status_label.configure(text="Ready", text_color="#666666"))
+            self.after(2000, lambda: self.status_label.configure(text="Ready", text_color="#8b949e"))
 
 
 class AddTopicDialog(ctk.CTkToplevel):
@@ -322,17 +323,20 @@ class AddTopicDialog(ctk.CTkToplevel):
         """Initialize dialog."""
         super().__init__(parent)
         self.title("Add Documentation Topic")
-        self.geometry("450x280")
-        self.resizable(False, False)
+        self.geometry("600x500")
+        self.resizable(True, True)
 
         self.db = db
         self.file_manager = file_manager
         self.docs_dir = docs_dir
 
+        # Set dark theme
+        self.configure(fg_color="#0d1117")
+
         # Center on parent
         self.update_idletasks()
-        x = parent.winfo_x() + (parent.winfo_width() // 2) - (450 // 2)
-        y = parent.winfo_y() + (parent.winfo_height() // 2) - (280 // 2)
+        x = parent.winfo_x() + (parent.winfo_width() // 2) - (600 // 2)
+        y = parent.winfo_y() + (parent.winfo_height() // 2) - (500 // 2)
         self.geometry(f"+{x}+{y}")
 
         # Make modal
@@ -340,65 +344,97 @@ class AddTopicDialog(ctk.CTkToplevel):
         self.grab_set()
 
         self._create_ui()
+        
+        # Bind Enter key to submit
+        self.bind('<Return>', lambda e: self.add_topic())
 
     def _create_ui(self):
         """Create dialog UI."""
         # Main frame
-        main_frame = ctk.CTkFrame(self, fg_color="#0f0f23")
-        main_frame.pack(fill="both", expand=True, padx=20, pady=20)
+        main_frame = ctk.CTkFrame(self, fg_color="#0d1117", border_width=2, border_color="#30363d", corner_radius=12)
+        main_frame.pack(fill="both", expand=True, padx=30, pady=30)
+
+        # Title
+        title_label = ctk.CTkLabel(
+            main_frame,
+            text="✚ Add New Topic",
+            font=("Segoe UI", 20, "bold"),
+            text_color="#58a6ff"
+        )
+        title_label.pack(pady=(20, 30))
 
         # Topic name
-        ctk.CTkLabel(main_frame, text="Topic Name", font=("Segoe UI", 12)).pack(anchor="w", pady=(0, 4))
+        ctk.CTkLabel(main_frame, text="Topic Name", font=("Segoe UI", 13, "bold"), text_color="#c9d1d9").pack(anchor="w", padx=20, pady=(0, 8))
         self.name_entry = ctk.CTkEntry(
             main_frame,
-            placeholder_text="e.g., React",
-            height=36,
-            font=("Segoe UI", 12)
+            placeholder_text="e.g., React, Vue, Django",
+            height=45,
+            font=("Segoe UI", 13),
+            fg_color="#161b22",
+            border_color="#30363d",
+            border_width=2
         )
-        self.name_entry.pack(fill="x", pady=(0, 12))
+        self.name_entry.pack(fill="x", padx=20, pady=(0, 20))
 
         # GitHub URL
-        ctk.CTkLabel(main_frame, text="GitHub URL", font=("Segoe UI", 12)).pack(anchor="w", pady=(0, 4))
+        ctk.CTkLabel(main_frame, text="GitHub Repository URL", font=("Segoe UI", 13, "bold"), text_color="#c9d1d9").pack(anchor="w", padx=20, pady=(0, 8))
         self.url_entry = ctk.CTkEntry(
             main_frame,
-            placeholder_text="https://github.com/user/repo",
-            height=36,
-            font=("Segoe UI", 12)
+            placeholder_text="https://github.com/username/repository",
+            height=45,
+            font=("Segoe UI", 13),
+            fg_color="#161b22",
+            border_color="#30363d",
+            border_width=2
         )
-        self.url_entry.pack(fill="x", pady=(0, 12))
+        self.url_entry.pack(fill="x", padx=20, pady=(0, 20))
 
         # Subfolder (optional)
-        ctk.CTkLabel(main_frame, text="Subfolder (optional)", font=("Segoe UI", 12)).pack(anchor="w", pady=(0, 4))
+        ctk.CTkLabel(main_frame, text="Documentation Subfolder (Optional)", font=("Segoe UI", 13, "bold"), text_color="#c9d1d9").pack(anchor="w", padx=20, pady=(0, 8))
         self.subfolder_entry = ctk.CTkEntry(
             main_frame,
-            placeholder_text="docs/ (leave empty if not needed)",
-            height=36,
-            font=("Segoe UI", 12)
+            placeholder_text="docs (leave empty for root)",
+            height=45,
+            font=("Segoe UI", 13),
+            fg_color="#161b22",
+            border_color="#30363d",
+            border_width=2
         )
-        self.subfolder_entry.pack(fill="x", pady=(0, 24))
+        self.subfolder_entry.pack(fill="x", padx=20, pady=(0, 30))
 
-        # Buttons
+        # Buttons frame - NO pack_propagate(False) to allow natural sizing
         button_frame = ctk.CTkFrame(main_frame, fg_color="transparent")
-        button_frame.pack(fill="x", pady=(0, 0))
+        button_frame.pack(fill="x", padx=20, pady=(20, 20))
 
-        cancel_btn = ctk.CTkButton(
-            button_frame,
-            text="Cancel",
-            font=("Segoe UI", 11),
-            fg_color="transparent",
-            border_width=1,
-            border_color="#3d3d5c",
-            command=self.destroy
-        )
-        cancel_btn.pack(side="right", padx=(8, 0))
-
+        # Add button (left side, more prominent)
         add_btn = ctk.CTkButton(
             button_frame,
-            text="Add Topic",
-            font=("Segoe UI", 11),
+            text="✓ ADD TOPIC",
+            font=("Segoe UI", 16, "bold"),
+            height=60,
+            width=250,
+            corner_radius=12,
+            fg_color="#238636",
+            hover_color="#2ea043",
             command=self.add_topic
         )
-        add_btn.pack(side="right", padx=(0, 8))
+        add_btn.pack(side="left", padx=(0, 15))
+
+        # Cancel button (right side)
+        cancel_btn = ctk.CTkButton(
+            button_frame,
+            text="CANCEL",
+            font=("Segoe UI", 16),
+            height=60,
+            width=180,
+            corner_radius=12,
+            fg_color="#21262d",
+            hover_color="#30363d",
+            border_width=2,
+            border_color="#30363d",
+            command=self.destroy
+        )
+        cancel_btn.pack(side="left")
 
     def add_topic(self):
         """Add the topic."""
