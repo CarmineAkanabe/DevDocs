@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
+import webbrowser
 from datetime import datetime
 from database.db_manager import DatabaseManager
 from services.downloader import Downloader
@@ -122,6 +123,19 @@ class MainWindow(ctk.CTk):
         )
         manual_btn.pack(side="left", padx=8)
 
+        about_btn = ctk.CTkButton(
+            right_frame,
+            text="About",
+            font=("Segoe UI", 11),
+            height=32,
+            corner_radius=6,
+            fg_color="transparent",
+            border_width=1,
+            border_color="#3d3d5c",
+            command=self.show_about
+        )
+        about_btn.pack(side="left", padx=8)
+
         sync_btn = ctk.CTkButton(
             right_frame,
             text="⟳ Sync",
@@ -149,6 +163,30 @@ class MainWindow(ctk.CTk):
         )
         self.status_label.pack(side="left", padx=12, pady=0)
 
+        # Center copyright (expand to take available space)
+        self.copy_label = ctk.CTkLabel(
+            self.status_frame,
+            text="© 2026 DevDocs",
+            font=("Segoe UI", 11, "bold"),
+            text_color="#ffffff"
+        )
+        self.copy_label.pack(side="left", expand=True)
+
+        # GitHub link (author) aligned right, larger and bold, pointer on hover
+        self.github_label = ctk.CTkLabel(
+            self.status_frame,
+            text="CarmineAkanabe",
+            font=("Segoe UI", 12, "bold"),
+            text_color="#22aa44"
+        )
+        self.github_label.pack(side="right", padx=(0,12), pady=0)
+        try:
+            self.github_label.bind("<Button-1>", lambda e: webbrowser.open("https://github.com/CarmineAkanabe"))
+            self.github_label.bind("<Enter>", lambda e: self.github_label.configure(cursor="hand2"))
+            self.github_label.bind("<Leave>", lambda e: self.github_label.configure(cursor=""))
+        except Exception:
+            pass
+
         self.progress_bar = ctk.CTkProgressBar(self.status_frame, width=200)
         self.progress_bar.pack(side="right", padx=12, pady=6)
         self.progress_bar.pack_forget()
@@ -158,7 +196,7 @@ class MainWindow(ctk.CTk):
         topics = self.db.get_all_topics()
         if len(topics) == 0:
             default_topics = [
-                ("GitHub Docs", "https://github.com/github/docs", "content"),
+                ("JavaScript (MDN)", "https://github.com/mdn/content", "files/en-us"),
                 ("Python", "https://github.com/python/cpython", "Doc"),
                 ("SQL", "https://github.com/sqlite/sqlite", None)
             ]
@@ -193,6 +231,17 @@ class MainWindow(ctk.CTk):
             self.reader_view.load_manual(manual_path)
         else:
             messagebox.showerror("Error", "UserManual.md not found")
+
+    def show_about(self):
+        """Display the README/About file."""
+        import os
+        readme_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'README.md')
+        readme_path = os.path.normpath(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "README.md"))
+        if os.path.exists(readme_path):
+            # reuse manual loader which expects a file path
+            self.reader_view.load_manual(readme_path)
+        else:
+            messagebox.showerror("Error", "README.md not found")
 
     def open_add_topic_dialog(self):
         """Open dialog to add new topic."""

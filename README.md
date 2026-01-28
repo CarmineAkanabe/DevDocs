@@ -59,7 +59,7 @@ Output should show `Python 3.10.x` or higher.
 
 #### Option A: Clone with Git (Recommended)
 ```bash
-git clone https://github.com/your-username/DevDocs.git
+git clone https://github.com/CarmineAkanabe/DevDocs.git
 cd DevDocs
 ```
 
@@ -370,29 +370,30 @@ After installation, verify:
 
 ---
 
-## 🎓 For Classroom Use
+## 👥 For All Users
 
-### Recommended Setup for Teachers
+### Getting Started
 
-1. **Install on one machine** — Test thoroughly first
-2. **Pre-download docs** — Run sync on main machine before class
-3. **Copy to other machines** — Share entire `DevDocs` folder via USB or network
-4. **Use offline in class** — No internet needed during lessons
+1. **Install on your machine** — Follow the installation guide above
+2. **Download documentation** — Select a topic and click "⟳ Sync" to download
+3. **Read offline** — All documentation is available offline after download
+4. **Share offline** — Copy the entire `DevDocs` folder to share with others offline
 
-### Benefits for Classroom
+### Benefits of DevDocs
 
-- ✅ Fast, offline access to documentation
-- ✅ No internet bandwidth consumed during class
-- ✅ Consistent experience across all student machines
-- ✅ Teach documentation navigation and organization
-- ✅ Students can practice adding custom topics
+- ✅ Fast, offline access to documentation anytime
+- ✅ No internet bandwidth required after initial download
+- ✅ Consistent experience across all platforms
+- ✅ Learn documentation navigation and organization
+- ✅ Add custom topics for your favorite frameworks
 
-### Student Projects
+### Use Cases
 
-- Have students add documentation for their favorite frameworks
-- Combine multiple topics into a class learning resource
-- Practice GitHub repository navigation and markdown reading
-- Learn about documentation organization best practices
+- Personal development and reference
+- Team knowledge sharing and onboarding
+- Classroom and educational environments
+- Remote areas with limited connectivity
+- Quick offline API reference during coding
 
 ---
 
@@ -446,5 +447,7 @@ This project is open source under the MIT License.
 **Last Updated**: January 2026  
 **Python Version**: 3.10+  
 **Platforms**: Windows, macOS, Linux  
+
+**Author**: Carmine Akabane (Serge) — https://github.com/CarmineAkanabe
 
 **Built with ❤️ for educators and developers**

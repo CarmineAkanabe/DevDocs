@@ -85,4 +85,44 @@ class Downloader:
                     'relative_path': rel_path
                 })
 
+        if not extracted_files:
+            # try fallback to fetch README directly
+            fallback = Downloader.fetch_readme_fallback(repo_url := None or github_url, target_dir, subfolder)
+            if fallback:
+                return fallback
+
         return extracted_files
+
+    @staticmethod
+    def fetch_readme_fallback(github_url: str, target_dir: str, subfolder: Optional[str] = None) -> list:
+        """If ZIP extraction yields no markdowns, try to fetch README.md directly from raw.githubusercontent.com for common locations."""
+        results = []
+        repo = github_url.rstrip('.git').replace('https://github.com/', '')
+        if '/' not in repo:
+            return results
+
+        owner, name = repo.split('/')[:2]
+        branches = ['main', 'master', 'develop', 'dev']
+        candidate_paths = ['README.md']
+        if subfolder:
+            candidate_paths.insert(0, f"{subfolder.strip('/')}/README.md")
+        candidate_paths.append('docs/README.md')
+
+        for branch in branches:
+            for path in candidate_paths:
+                raw_url = f"https://raw.githubusercontent.com/{owner}/{name}/{branch}/{path}"
+                try:
+                    r = requests.get(raw_url, timeout=15)
+                    if r.status_code == 200 and r.content:
+                        # write file
+                        local_rel = os.path.join(path.replace('/', os.sep))
+                        local_path = os.path.join(target_dir, os.path.basename(path))
+                        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+                        with open(local_path, 'wb') as f:
+                            f.write(r.content)
+                        results.append({'local_path': local_path, 'relative_path': os.path.basename(path)})
+                        return results
+                except Exception:
+                    continue
+
+        return results

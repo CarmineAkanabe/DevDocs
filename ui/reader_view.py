@@ -5,6 +5,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name, guess_lexer
 from pygments.formatters import RawTokenFormatter
 import re
+import os
 
 
 class ReaderView(ctk.CTkFrame):
@@ -62,21 +63,28 @@ class ReaderView(ctk.CTkFrame):
         try:
             self.current_doc_id = None
             content = self.file_manager.read_file(file_path)
-            parsed = self.parser.parse(content)
+            # If parser fails or content isn't markdown-like, render as plain text
+            try:
+                parsed = self.parser.parse(content)
+            except Exception:
+                parsed = None
 
             # Set breadcrumb
             self.breadcrumb_label.configure(text="Help / UserManual", text_color="#666666")
 
             # Set title
-            title = parsed['title']
+            title = parsed['title'] if parsed and parsed.get('title') else 'User Manual'
             self.title_label.configure(text=title)
 
             # Clear content
             for widget in self.scroll_frame.winfo_children():
                 widget.destroy()
 
-            # Render markdown
-            self._render_markdown(content)
+            # Render markdown or plain text
+            if parsed:
+                self._render_markdown(content)
+            else:
+                self._render_plain_text(content)
 
         except Exception as e:
             error_label = ctk.CTkLabel(
@@ -92,22 +100,30 @@ class ReaderView(ctk.CTkFrame):
         try:
             self.current_doc_id = doc_id
             content = self.file_manager.read_file(file_path)
-            parsed = self.parser.parse(content)
+            # Try parse; fall back to plain text when parsing fails or content lacks markdown markers
+            parsed = None
+            try:
+                parsed = self.parser.parse(content)
+            except Exception:
+                parsed = None
 
             # Set breadcrumb
             breadcrumb = " > ".join(relative_path.replace("\\", "/").split("/"))
             self.breadcrumb_label.configure(text=breadcrumb, text_color="#666666")
 
             # Set title
-            title = parsed['title']
+            title = parsed['title'] if parsed and parsed.get('title') else os.path.basename(file_path)
             self.title_label.configure(text=title)
 
             # Clear content
             for widget in self.scroll_frame.winfo_children():
                 widget.destroy()
 
-            # Render markdown
-            self._render_markdown(content)
+            # Render markdown or plain text
+            if parsed:
+                self._render_markdown(content)
+            else:
+                self._render_plain_text(content)
 
         except Exception as e:
             error_label = ctk.CTkLabel(
@@ -146,7 +162,7 @@ class ReaderView(ctk.CTkFrame):
                     self.scroll_frame,
                     text=text,
                     font=("Segoe UI", 26, "bold"),
-                    text_color="#ffffff",
+                    text_color="#bff3d6",
                     wraplength=800
                 )
                 label.pack(anchor="w", pady=(32, 16))
@@ -159,7 +175,7 @@ class ReaderView(ctk.CTkFrame):
                     self.scroll_frame,
                     text=text,
                     font=("Segoe UI", 22, "bold"),
-                    text_color="#e0e0e0",
+                    text_color="#bff3d6",
                     wraplength=800
                 )
                 label.pack(anchor="w", pady=(24, 12))
@@ -172,7 +188,7 @@ class ReaderView(ctk.CTkFrame):
                     self.scroll_frame,
                     text=text,
                     font=("Segoe UI", 18, "bold"),
-                    text_color="#cccccc",
+                    text_color="#bff3d6",
                     wraplength=800
                 )
                 label.pack(anchor="w", pady=(20, 10))
@@ -207,6 +223,25 @@ class ReaderView(ctk.CTkFrame):
                 para_label.pack(anchor="w", pady=(0, 12))
 
             i += 1
+
+    def _render_plain_text(self, content: str):
+        """Render a plain text document inside the reader scroll frame."""
+        # Clear existing
+        for widget in self.scroll_frame.winfo_children():
+            widget.destroy()
+
+        from tkinter import Text
+        frame = ctk.CTkFrame(self.scroll_frame, fg_color="#1a1a2e", corner_radius=6)
+        frame.pack(fill="both", expand=True, pady=12)
+
+        text_widget = Text(frame, wrap="word", font=("Consolas", 12), bg="#0f0f23", fg="#e0e0e0", bd=0)
+        text_widget.pack(fill="both", expand=True, padx=8, pady=8)
+        text_widget.insert("1.0", content)
+        text_widget.config(state="disabled")
+
+    def load_readme(self, file_path: str):
+        """Load README or ABOUT file and render (alias for manual)."""
+        self.load_manual(file_path)
 
     def _render_code_block(self, code: str, language: str):
         """Render code block with syntax highlighting using Pygments."""
