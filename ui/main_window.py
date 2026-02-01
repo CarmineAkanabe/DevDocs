@@ -197,9 +197,9 @@ class MainWindow(ctk.CTk):
         topics = self.db.get_all_topics()
         if len(topics) == 0:
             default_topics = [
-                ("GitHub Docs", "https://github.com/github/docs", "content"),
+                ("Laravel Docs", "https://github.com/laravel/docs", None),
                 ("Python Docs", "https://github.com/python/cpython", "Doc"),
-                ("React Docs", "https://github.com/facebook/react", "docs")
+                ("Vue.js Docs", "https://github.com/vuejs/docs", "src")
             ]
 
             for name, url, subfolder in default_topics:
@@ -308,8 +308,23 @@ class MainWindow(ctk.CTk):
             self.document_view.refresh_current_topic()
 
         except Exception as e:
-            self.status_label.configure(text=f"✗ Error: {str(e)}", text_color="#f85149")
-            messagebox.showerror("Download Error", str(e))
+            error_msg = str(e)
+            self.status_label.configure(text=f"✗ Error: {error_msg}", text_color="#f85149")
+            
+            # Check if it's a 404 error
+            if "404" in error_msg or "not found" in error_msg.lower() or "Could not download" in error_msg:
+                messagebox.showerror(
+                    "404 - Repository Not Found",
+                    f"Failed to download documentation:\n\n{error_msg}\n\n"
+                    "Possible causes:\n"
+                    "• Repository URL is incorrect\n"
+                    "• Repository doesn't exist or was moved\n"
+                    "• Repository is private\n"
+                    "• Branch doesn't exist (tried: main, master, develop, dev)\n\n"
+                    "Please verify the GitHub URL and try again."
+                )
+            else:
+                messagebox.showerror("Download Error", f"An error occurred:\n\n{error_msg}")
         finally:
             self.downloading = False
             self.progress_bar.pack_forget()

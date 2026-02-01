@@ -72,9 +72,9 @@ DevDocs is a powerful offline documentation reader designed for developers who n
 When you first open DevDocs, you'll see:
 
 1. **Three Pre-configured Topics:**
-   - 📘 **GitHub Docs** - Official GitHub documentation
+   - 🦄 **Laravel Docs** - Laravel framework documentation
    - 🐍 **Python Docs** - Python standard library
-   - ⚛️ **React Docs** - React framework documentation
+   - 💚 **Vue.js Docs** - Vue.js framework documentation
 
 2. **Empty Document Tree:**
    - No documents are downloaded yet
@@ -692,7 +692,7 @@ If a repository has docs in multiple locations, add separate topics:
 
 4. **Try Different Repository:**
    - Test with known-good repo
-   - Example: `https://github.com/github/docs`
+   - Example: `https://github.com/laravel/docs`
    - Verify DevDocs is working
 
 #### Issue 3: Search not working
